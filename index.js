@@ -35,7 +35,7 @@ exports.handler = function (input, context) {
 };
 
 function readS3JsonFile(filename) {
-    console.warn(`reading: ${filename}`);
+    console.log(`reading: ${filename}`);
     return new Promise((resolve, reject) => {
         s3.getObject({
             Bucket: bucket,
@@ -62,7 +62,7 @@ function writeS3JsonFile(filename, body) {
         Body: JSON.stringify(body)
     };
     return new Promise((resolve, reject) => {
-        console.warn(`writing: ${filename}`);
+        console.log(`writing: ${filename}`);
         s3.deleteObject({Bucket: params.Bucket, Key: params.Key}, (err) => {
             if (err) reject(err, err.stack);
             s3.putObject(params, (err) => {
@@ -96,14 +96,14 @@ function scrapeResourceChannel(source, keys) {
             const filename = `${source}-${key}.json`;
             readS3JsonFile(filename)
                 .then((output) => {
-                    console.warn(`comparing to: ${filename}`);
+                    console.log(`comparing to: ${filename}`);
                     if (!scrapeFunction) {
                         reject(`invalid source: ${source}`);
                     }
-                    console.warn(`scraping: ${source}-${key}`);
+                    console.log(`scraping: ${source}-${key}`);
                     scrapeFunction(key)
                         .then((result) => {
-                            console.warn(`scrape finished: ${JSON.stringify(result)}`);
+                            console.log(`scrape finished: ${JSON.stringify(result)}`);
                             writeS3JsonFile(filename, mergeScrapeResultsToOutput(output, result))
                                 .then((result) => resolve(result))
                                 .catch((reason, stack) => reject(reason, stack))
@@ -172,7 +172,7 @@ function scrapeReddit(subreddit) {
 }
 
 function mergeScrapeResultsToOutput(output, result) {
-    console.warn(`merging...`);
+    console.log(`merging...`);
     return (!!output) ? _.unionBy(result, output, 'ref') : _.uniqBy(result, 'ref');
 }
 

@@ -6,7 +6,7 @@ The project demonstrates how to integrate Lambda with [AWS S3](https://aws.amazo
 
 ## Prerequisites
 
-If you have never used AWS S3 before, you'll need to first verify bucket named `tag-scraper` exists.
+AWS S3 action required: you'll need to first verify bucket named `tag-scraper` exists.
 
 ## Try it out
 
