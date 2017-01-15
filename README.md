@@ -14,7 +14,7 @@ If you have never used AWS S3 before, you'll need to first verify bucket named `
 2. run `npm start` to set up the lambda project under the default name on AWS 
 3. edit the [input.json](input.json) file and set up the keywords in each channel
 4. run `npm test` to execute the function manually using the test event
-5. Then set it up as a scheduled event on AWS so it runs automatically, by executing `npm run schedule`. This will run the event from `test.json` every five minutes.
+5. Then set it up as a scheduled event on AWS so it runs automatically, by executing `npm run schedule`. This will run the event from `input.json` every five minutes.
 
 ## How it works
 
@@ -23,4 +23,4 @@ the execution frequency in `package.json` easily and re-create a different event
 
 You can see all scheduled events in the [CloudWatch Rules Console](https://console.aws.amazon.com/cloudwatch/), and disable the event there if you don't want to receive any more e-mail notifications.
 
-Check out the [main.js](main.js) file to see how the Lambda function works.
+Check out the [index.js](index.js) file to see how the Lambda function works.
