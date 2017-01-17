@@ -101,6 +101,7 @@ function scrapeResourceChannel(source, keys) {
                         reject(`invalid source: ${source}`);
                     }
                     console.log(`scraping: ${source}-${key}`);
+                    (!scrapeFunction) && reject(`no such scraper: ${source}`, null);
                     scrapeFunction(key)
                         .then((result) => {
                             console.log(`scrape finished: ${JSON.stringify(result)}`);
